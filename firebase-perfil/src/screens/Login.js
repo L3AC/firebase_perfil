@@ -22,12 +22,15 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View>
       <View style={styles.contenedor}>
+        <Text style={styles.titulo}>Login</Text>
         <TextInput style={styles.inputUsu} placeholderTextColor={'#fff'} placeholder="Email" value={email} onChangeText={setEmail} />
         <TextInput style={styles.inputContra} placeholderTextColor={'#fff'} placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
         <TouchableOpacity style={styles.boton} onPress={handleLogin}>
           <Text style={styles.textoBoton}>Login</Text>
         </TouchableOpacity>
-        <Text onPress={() => navigation.navigate('Register')}>Don't have an account? Register</Text>
+        <View style={styles.contenedorText}>
+          <Text style={styles.textoRegistro} onPress={() => navigation.navigate('Register')}>Don't have an account? Register</Text>
+        </View>
       </View>
     </View>
   );
@@ -47,6 +50,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.55,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+
+  titulo: {
+    textAlign: 'center',
+    fontFamily: 'Arial',
+    fontSize: 26,
+    fontWeight: 'bold'
   },
 
   inputUsu: {
@@ -72,7 +82,7 @@ const styles = StyleSheet.create({
 
   boton: {
     width: '50%',
-    height:45,
+    height: 45,
     padding: 10,
     borderColor: '#2F2C2C',
     borderWidth: 2,
@@ -80,10 +90,21 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: 'center'
   },
-  
-  textoBoton:{
+
+  textoBoton: {
     color: '#2F2C2C',
     textAlign: 'center',
+  },
+
+  contenedorText: {
+    alignSelf: 'center',
+    marginTop: 10
+  },
+
+  textoRegistro: {
+    fontFamily: 'Arial',
+    textAlign: 'center',
+    width: 150,
   },
 });
 
