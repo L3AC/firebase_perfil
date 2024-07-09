@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignSelf: 'center',
     padding: 10,
-    fontFamily: 'Arial'
+    fontFamily: 'Arial',
+    color: '#fff'
   },
   inputContra: {
     backgroundColor: '#2F2C2C',
@@ -77,7 +78,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignSelf: 'center',
     padding: 10,
-    fontFamily: 'Arial'
+    fontFamily: 'Arial',
+    color: '#fff'
   },
 
   boton: {
