@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import Input  from '../components/input';
+import InputC from '../components/inputContra';
+import Boton from '../components/boton';
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -10,9 +13,8 @@ const RegisterScreen = ({ navigation }) => {
   const handleRegister = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        console.log('Registered with:', user.email);
-        navigation.navigate('Home');
+        // Navegar a la pantalla de inicio de sesión después del registro exitoso
+        navigation.navigate('Login');
       })
       .catch((error) => {
         console.error(error);
@@ -23,13 +25,22 @@ const RegisterScreen = ({ navigation }) => {
     <View>
       <View style={styles.contenedor}>
         <Text style={styles.titulo}>Registro</Text>
-        <TextInput style={styles.inputUsu} placeholderTextColor={'#fff'} placeholder="Email" value={email} onChangeText={setEmail} />
-        <TextInput style={styles.inputContra} placeholderTextColor={'#fff'} placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
-        <TouchableOpacity style={styles.boton} onPress={handleRegister}>
-          <Text style={styles.textoBoton}>Registro</Text>
-        </TouchableOpacity>
+        <Input
+            onChangeText={setEmail}
+            value={setEmail}
+            placeholder="Email"
+        />
+        <InputC
+            onChangeText={password}
+            value={setPassword}
+            placeholder="Clave"
+        />
+        <Boton
+            textoBoton="Registro"
+            accionBoton={handleRegister}
+        />
         <View style={styles.contenedorText}>
-          <Text style={styles.textoRegistro} onPress={() => navigation.navigate('Login')}>¿Ya tienes una cuenta? Iniciar sesion</Text>
+          <Text style={styles.textoRegistro} onPress={() => navigation.navigate('Login')}>¿Ya tienes una cuenta? Iniciar sesión</Text>
         </View>
       </View>
     </View>
@@ -51,14 +62,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-
   titulo: {
     textAlign: 'center',
     fontFamily: 'Arial',
     fontSize: 26,
     fontWeight: 'bold'
   },
-
   inputUsu: {
     backgroundColor: '#2F2C2C',
     marginTop: 20,
@@ -81,7 +90,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Arial',
     color: '#fff'
   },
-
   boton: {
     width: '50%',
     height: 45,
@@ -92,17 +100,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: 'center'
   },
-
   textoBoton: {
     color: '#2F2C2C',
     textAlign: 'center',
   },
-
   contenedorText: {
     alignSelf: 'center',
     marginTop: 10
   },
-
   textoRegistro: {
     fontFamily: 'Arial',
     textAlign: 'center',

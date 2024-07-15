@@ -4,6 +4,9 @@ import { database, storage } from '../config/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
 import * as ImagePicker from 'expo-image-picker';
+import Input  from '../components/input';
+import InputC from '../components/inputContra';
+import Boton from '../components/boton';
 
 // Componente Add para agregar un nuevo producto
 const Add = ({ navigation }) => {
