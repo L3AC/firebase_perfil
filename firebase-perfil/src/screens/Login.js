@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import Input  from '../components/input';
-import InputC from '../components/inputContra';
+import Input from '../components/input';
 import Boton from '../components/boton';
 
 const LoginScreen = ({ navigation }) => {
@@ -11,12 +10,17 @@ const LoginScreen = ({ navigation }) => {
   const auth = getAuth();
 
   const handleLogin = () => {
+    console.log('Email:', email, 'Password:', password); 
+
+    if (!email || !password) {
+      console.error('Email and password must not be empty');
+      return;
+    }
+
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log('Logged in with:', user.email);
-        setEmail('');
-        setPassword('');
         navigation.navigate('Home');
       })
       .catch((error) => {
@@ -30,13 +34,14 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.titulo}>Login</Text>
         <Input
             onChangeText={setEmail}
-            value={setEmail}
+            value={email}
             placeholder="Email"
         />
-        <InputC
-            onChangeText={password}
-            value={setPassword}
+        <Input
+            onChangeText={setPassword}
+            value={password}
             placeholder="Clave"
+            secureTextEntry
         />
         <Boton
             textoBoton="Login"
@@ -65,58 +70,16 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-
   titulo: {
     textAlign: 'center',
     fontFamily: 'Arial',
     fontSize: 26,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
-
-  inputUsu: {
-    backgroundColor: '#2F2C2C',
-    marginTop: 20,
-    width: '75%',
-    height: 45,
-    borderRadius: 12,
-    alignSelf: 'center',
-    padding: 10,
-    fontFamily: 'Arial',
-    color: '#fff'
-  },
-  inputContra: {
-    backgroundColor: '#2F2C2C',
-    marginTop: 10,
-    width: '75%',
-    height: 45,
-    borderRadius: 12,
-    alignSelf: 'center',
-    padding: 10,
-    fontFamily: 'Arial',
-    color: '#fff'
-  },
-
-  boton: {
-    width: '50%',
-    height: 45,
-    padding: 10,
-    borderColor: '#2F2C2C',
-    borderWidth: 2,
-    borderRadius: 10,
-    marginTop: 10,
-    alignSelf: 'center'
-  },
-
-  textoBoton: {
-    color: '#2F2C2C',
-    textAlign: 'center',
-  },
-
   contenedorText: {
     alignSelf: 'center',
-    marginTop: 10
+    marginTop: 10,
   },
-
   textoRegistro: {
     fontFamily: 'Arial',
     textAlign: 'center',

@@ -13,8 +13,6 @@ const RegisterScreen = ({ navigation }) => {
   const handleRegister = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Navegar a la pantalla de inicio de sesión después del registro exitoso
-        navigation.navigate('Login');
       })
       .catch((error) => {
         console.error(error);
@@ -30,10 +28,11 @@ const RegisterScreen = ({ navigation }) => {
             value={setEmail}
             placeholder="Email"
         />
-        <InputC
-            onChangeText={password}
-            value={setPassword}
+        <Input
+            onChangeText={setPassword}
+            value={password}
             placeholder="Clave"
+            secureTextEntry
         />
         <Boton
             textoBoton="Registro"
